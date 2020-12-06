@@ -1,0 +1,8 @@
+200 => OK
+400 => Bad request
+401 => Unauthorized
+403 => Forbidden                (when someone wants to open a group he is not in)
+404 => Not Found
+405 => Method Not Allowed
+412 => Precondition fails      (email does not exist, text not long enough)
+500 => Internal Server Error    (Create into database failed)

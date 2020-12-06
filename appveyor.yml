@@ -1,0 +1,35 @@
+#https://info.cloudlab.zhaw.ch/pages/ci.html
+
+image: ubuntu-18.04-amd64
+
+# node
+environment:
+  nodejs_version: "6"
+
+
+# Install scripts. (runs after repo cloning)
+install:
+  #node
+  - cd Backend/REST_API/ && npm -loglevel=error install && cd ../..
+  
+  #flutter
+  #https://flutter.dev/docs/get-started/install/linux#update-your-path
+  - git clone --quiet https://github.com/flutter/flutter.git -b 1.17.1
+  - export PATH="$PATH:`pwd`/flutter/bin"
+  - flutter --version
+
+
+# Post-install test scripts.
+test_script:
+  #node
+  - node --version
+  - npm --version
+  - cd Backend/REST_API && npm t all && cd ../..
+  
+  #flutter
+  #https://flutter.dev/docs/cookbook/testing/unit/introduction
+  - cd Frontend/achivi && flutter test && cd ../..
+
+
+# Don't actually build.
+build: false
